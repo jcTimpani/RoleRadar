@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Jobs — RoleRadar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<script src="assets/js/store.js"></script>
+</head>
+<body class="app" data-page="find-jobs">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div class="shell-col">
+    <header class="topbar" id="topbar-root"></header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>Find Your Next Opportunity</h1>
+          <p>Search millions of jobs from top platforms in one place.</p>
+        </div>
+      </div>
+
+      <form class="search-bar" id="search-form">
+        <div class="input-wrap"><i class="fas fa-magnifying-glass"></i><input class="input" id="search-q" placeholder="Data Scientist"></div>
+        <div class="input-wrap" style="max-width:260px;"><i class="fas fa-location-dot"></i><input class="input" id="search-loc" placeholder="Dallas, TX"></div>
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+
+      <div class="pill-row" id="pill-filters">
+        <button class="pill active" data-filter="all">All</button>
+        <button class="pill" data-filter="remote">Remote</button>
+        <button class="pill" data-filter="onsite">On-site</button>
+        <button class="pill" data-filter="hybrid">Hybrid</button>
+        <button class="pill" data-filter="full-time">Full-time</button>
+        <button class="pill" data-filter="part-time">Part-time</button>
+      </div>
+
+      <button type="button" class="btn btn-outline filters-toggle" id="filters-toggle" aria-expanded="false" aria-controls="filter-panel"><i class="fas fa-sliders"></i> Filters</button>
+
+      <div class="jobs-layout">
+        <aside class="card filter-panel" id="filter-panel">
+          <h4>Job Category</h4>
+          <div id="category-filters">
+            <label class="filter-opt"><input type="radio" name="category" value="all" checked> All Roles</label>
+            <label class="filter-opt"><input type="radio" name="category" value="software"> Software Engineering</label>
+            <label class="filter-opt"><input type="radio" name="category" value="frontend"> Frontend</label>
+            <label class="filter-opt"><input type="radio" name="category" value="data"> Data / ML</label>
+            <label class="filter-opt"><input type="radio" name="category" value="qa"> QA / Testing</label>
+            <label class="filter-opt"><input type="radio" name="category" value="devops"> DevOps / Cloud</label>
+            <label class="filter-opt"><input type="radio" name="category" value="security"> Cybersecurity</label>
+          </div>
+
+          <h4>Job Type</h4>
+          <label class="filter-opt"><input type="checkbox" name="jobtype" value="full-time"> Full-time</label>
+          <label class="filter-opt"><input type="checkbox" name="jobtype" value="part-time"> Part-time</label>
+          <label class="filter-opt"><input type="checkbox" name="jobtype" value="contract"> Contract</label>
+          <label class="filter-opt"><input type="checkbox" name="jobtype" value="internship"> Internship</label>
+
+          <h4>Salary Range</h4>
+          <label class="filter-opt"><input type="radio" name="salary" value="0-50"> $0 - $50K</label>
+          <label class="filter-opt"><input type="radio" name="salary" value="50-100"> $50K - $100K</label>
+          <label class="filter-opt"><input type="radio" name="salary" value="100-150"> $100K - $150K</label>
+          <label class="filter-opt"><input type="radio" name="salary" value="150-9999"> $150K+</label>
+          <label class="filter-opt"><input type="radio" name="salary" value="" checked> Any</label>
+
+          <h4>Experience Level</h4>
+          <label class="filter-opt"><input type="checkbox" name="exp" value="entry"> Entry Level</label>
+          <label class="filter-opt"><input type="checkbox" name="exp" value="mid"> Mid Level</label>
+          <label class="filter-opt"><input type="checkbox" name="exp" value="senior"> Senior Level</label>
+        </aside>
+
+        <div class="results-col">
+          <div class="results-header">
+            <span id="results-count">Loading jobs…</span>
+            <span class="flex items-center gap-2">Sort by
+              <select id="sort-select">
+                <option value="relevance">Relevance</option>
+                <option value="salary-high">Salary: High to Low</option>
+                <option value="newest">Newest</option>
+              </select>
+            </span>
+          </div>
+          <div class="card results-list" id="results-list"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/jobs-ui.js"></script>
+<script src="assets/js/sidebar.js"></script>
+<script src="assets/js/suggest.js"></script>
+<script src="assets/js/findjobs.js"></script>
+</body>
+</html>

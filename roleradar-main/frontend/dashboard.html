@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — RoleRadar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<script src="assets/js/store.js"></script>
+<script src="assets/js/auth-gate.js"></script>
+</head>
+<body class="app" data-page="dashboard">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div>
+    <header class="topbar" id="topbar-root"></header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1 id="welcome-heading">Welcome back!</h1>
+          <p>Let's make progress on your career goals.</p>
+        </div>
+        <div class="quote-badge">&ldquo;Small progress each day leads to big opportunities.&rdquo;</div>
+      </div>
+
+      <div class="stats-row">
+        <div class="card stat-tile">
+          <div class="stat-icon c-blue"><i class="fas fa-briefcase"></i></div>
+          <div class="stat-value" id="stat-jobs">--</div>
+          <div class="stat-label">Jobs Available</div>
+        </div>
+        <div class="card stat-tile">
+          <div class="stat-icon c-blue"><i class="fas fa-paper-plane"></i></div>
+          <div class="stat-value" id="stat-applications">0</div>
+          <div class="stat-label">Applications</div>
+        </div>
+        <div class="card stat-tile">
+          <div class="stat-icon c-green"><i class="fas fa-chart-line"></i></div>
+          <div class="stat-value" id="stat-resume-match">--</div>
+          <div class="stat-label">Resume Match</div>
+        </div>
+        <div class="card stat-tile">
+          <div class="stat-icon c-purple"><i class="fas fa-comments"></i></div>
+          <div class="stat-value" id="stat-interview-qs">0</div>
+          <div class="stat-label">Interview Questions Practiced</div>
+        </div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="dash-col">
+          <div class="card section-card">
+            <div class="section-head">
+              <h3>Recommended Jobs for You</h3>
+              <a href="find-jobs.html">View All <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div id="recommended-jobs"><p class="text-muted">Loading recommended jobs…</p></div>
+          </div>
+        </div>
+        <div class="dash-col">
+          <div class="card section-card">
+            <h3>Quick Actions</h3>
+            <div class="quick-actions" style="margin-top:14px;">
+              <a class="quick-action green" href="resume-checker.html"><i class="fas fa-file-arrow-up"></i><strong>Upload Resume</strong><span>Get AI Feedback</span></a>
+              <a class="quick-action blue" href="interview-practice.html"><i class="fas fa-microphone"></i><strong>Practice Interview</strong><span>Start Now</span></a>
+              <a class="quick-action gray" href="find-jobs.html"><i class="fas fa-magnifying-glass"></i><strong>Find Jobs</strong><span>Search &amp; Filter</span></a>
+              <a class="quick-action purple" href="applications.html"><i class="fas fa-list-check"></i><strong>View Applications</strong><span>Track Status</span></a>
+            </div>
+          </div>
+          <div class="card section-card">
+            <h3>Your Progress</h3>
+            <div class="flex items-center gap-4" style="margin-top:10px;">
+              <div class="progress-ring">
+                <svg width="110" height="110">
+                  <circle class="ring-bg" cx="55" cy="55" r="45"></circle>
+                  <circle class="ring-fg" id="progress-ring-fg" cx="55" cy="55" r="45" stroke-dasharray="283" stroke-dashoffset="283"></circle>
+                </svg>
+                <div class="ring-label"><span id="progress-ring-value">0%</span><small>Overall<br>Progress</small></div>
+              </div>
+              <ul class="progress-check-list" id="progress-checklist"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="app-footer">RoleRadar — Your Skills. Our Radar. A Brighter Tomorrow.</footer>
+  </div>
+</div>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/jobs-ui.js"></script>
+<script src="assets/js/sidebar.js"></script>
+<script src="assets/js/dashboard.js"></script>
+</body>
+</html>

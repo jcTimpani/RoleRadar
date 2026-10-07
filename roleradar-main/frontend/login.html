@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In — RoleRadar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/public.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="pub">
+<div class="auth-shell">
+  <div class="auth-left">
+   <div class="auth-left-inner">
+    <div class="pub-logo" id="auth-logo" style="margin-bottom:32px;"></div>
+
+    <div id="login-panel">
+      <h1 style="font-size:var(--fs-xl);margin-bottom:4px;">Welcome Back</h1>
+      <p class="text-muted" style="color:var(--pub-text-secondary);margin-bottom:24px;">Log in to continue your job search journey.</p>
+      <p class="auth-msg" id="login-msg" role="alert"></p>
+      <form id="login-form">
+        <div class="field">
+          <label for="login-email">Email address</label>
+          <input class="input" type="email" id="login-email" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="login-password">Password</label>
+          <input class="input" type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+        </div>
+        <div style="margin-bottom:20px;font-size:var(--fs-sm);text-align:right;">
+          <a href="#" class="auth-toggle-link" id="show-forgot">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="login-btn">Log In</button>
+      </form>
+      <p style="text-align:center;margin-top:24px;font-size:var(--fs-sm);color:var(--pub-text-secondary);">
+        Don't have an account? <a href="#" class="auth-toggle-link" id="show-signup">Sign Up</a>
+      </p>
+    </div>
+
+    <div id="signup-panel" style="display:none;">
+      <h1 style="font-size:var(--fs-xl);margin-bottom:4px;">Create Your Account</h1>
+      <p style="color:var(--pub-text-secondary);margin-bottom:24px;">Start your smarter job search today.</p>
+      <p class="auth-msg" id="signup-msg" role="alert"></p>
+      <form id="signup-form">
+        <div class="field">
+          <label for="signup-name">Full name</label>
+          <input class="input" type="text" id="signup-name" placeholder="Your full name" autocomplete="name" maxlength="100" required>
+        </div>
+        <div class="field">
+          <label for="signup-email">Email address</label>
+          <input class="input" type="email" id="signup-email" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="signup-password">Password</label>
+          <input class="input" type="password" id="signup-password" placeholder="At least 8 characters" autocomplete="new-password" minlength="8" maxlength="128" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="signup-btn">Sign Up</button>
+      </form>
+      <p style="text-align:center;margin-top:24px;font-size:var(--fs-sm);color:var(--pub-text-secondary);">
+        Already have an account? <a href="#" class="auth-toggle-link" id="show-login">Log In</a>
+      </p>
+    </div>
+
+    <div id="forgot-panel" style="display:none;">
+      <h1 style="font-size:var(--fs-xl);margin-bottom:4px;">Reset Your Password</h1>
+      <p style="color:var(--pub-text-secondary);margin-bottom:24px;">Enter your email and we will send you a link to choose a new password.</p>
+      <p class="auth-msg" id="forgot-msg" role="alert"></p>
+      <form id="forgot-form">
+        <div class="field">
+          <label for="forgot-email">Email address</label>
+          <input class="input" type="email" id="forgot-email" placeholder="you@example.com" autocomplete="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="forgot-btn">Send Reset Link</button>
+      </form>
+      <p style="text-align:center;margin-top:24px;font-size:var(--fs-sm);"><a href="#" class="auth-toggle-link" id="forgot-back">Back to Log In</a></p>
+    </div>
+
+    <div id="sent-panel" class="auth-state" style="display:none;">
+      <div class="auth-icon"><i class="fas fa-envelope-circle-check"></i></div>
+      <h1 style="font-size:var(--fs-xl);margin-bottom:8px;" id="sent-title">Check your email</h1>
+      <p style="color:var(--pub-text-secondary);margin-bottom:8px;" id="sent-text"></p>
+      <p style="font-weight:700;word-break:break-all;margin-bottom:20px;" id="sent-email"></p>
+      <p class="auth-msg" id="sent-msg" role="status"></p>
+      <p style="font-size:var(--fs-sm);color:var(--pub-text-secondary);" id="sent-resend-row">
+        Did not get it? <button type="button" class="auth-link-btn" id="resend-btn">Resend email</button>
+      </p>
+      <p style="margin-top:24px;font-size:var(--fs-sm);"><a href="#" class="auth-toggle-link" id="sent-back">Back to Log In</a></p>
+    </div>
+   </div>
+  </div>
+
+  <div class="auth-right">
+    <h2>One Platform for a <span style="color:var(--accent-green)">Brighter</span> Tomorrow</h2>
+    <div style="margin-top:24px;">
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Find real jobs</div>
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Get AI-powered insights</div>
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Improve your resume</div>
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Practice interviews</div>
+    </div>
+    <div class="auth-quote">"Opportunities don't happen. You find them."</div>
+  </div>
+</div>
+
+<script src="assets/js/store.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+  const $ = (id) => document.getElementById(id);
+  $('auth-logo').innerHTML = `<span class="rr-mark">${RR_LOGO_SVG}</span><span class="wordmark"><span class="wordmark-role">Role</span><span class="wordmark-radar">Radar</span></span>`;
+
+  const PANELS = ['login', 'signup', 'forgot', 'sent'];
+  function show(name) {
+    PANELS.forEach(p => { $(p + '-panel').style.display = p === name ? 'block' : 'none'; });
+    PANELS.forEach(p => setMsg(p + '-msg', ''));
+  }
+  function setMsg(id, text, kind) {
+    const el = $(id);
+    el.textContent = text || '';
+    el.className = 'auth-msg' + (text ? ' show ' + (kind || 'error') : '');
+  }
+  function busy(btn, on, label) { btn.disabled = on; btn.textContent = on ? 'Please wait…' : label; }
+
+  $('show-signup').addEventListener('click', (e) => { e.preventDefault(); show('signup'); });
+  $('show-login').addEventListener('click', (e) => { e.preventDefault(); show('login'); });
+  $('show-forgot').addEventListener('click', (e) => { e.preventDefault(); const typed = $('login-email').value; show('forgot'); $('forgot-email').value = typed; });
+  $('forgot-back').addEventListener('click', (e) => { e.preventDefault(); show('login'); });
+  $('sent-back').addEventListener('click', (e) => { e.preventDefault(); show('login'); });
+
+  // Notices arriving from other pages (verification link, reset, expired session).
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('mode') === 'signup') show('signup');
+  if (params.get('verified')) setMsg('login-msg', 'Email verified. Log in to continue.', 'ok');
+  if (params.get('reset')) setMsg('login-msg', 'Password updated. Log in with your new password.', 'ok');
+  if (params.get('expired')) setMsg('login-msg', 'Your session expired. Please log in again.', 'error');
+
+  let pendingEmail = '';
+  function showSent(kind, email) {
+    pendingEmail = email;
+    show('sent');
+    $('sent-email').textContent = email;
+    $('sent-title').textContent = kind === 'verify' ? 'Check your email' : 'Reset link sent';
+    $('sent-text').textContent = kind === 'verify'
+      ? 'We sent a verification link to the address below. Click it to activate your account. The link works for 24 hours.'
+      : 'If an account exists for the address below, a link to choose a new password is on its way. It works for 1 hour.';
+    $('sent-resend-row').style.display = kind === 'verify' ? 'block' : 'none';
+  }
+
+  function startCooldown(btn, seconds) {
+    let left = seconds; btn.disabled = true;
+    const tick = () => {
+      if (left <= 0) { btn.disabled = false; btn.textContent = 'Resend email'; return; }
+      btn.textContent = `Resend in ${left}s`; left -= 1; setTimeout(tick, 1000);
+    };
+    tick();
+  }
+
+  $('resend-btn').addEventListener('click', async () => {
+    const res = await RoleRadarAPI.auth.resend(pendingEmail);
+    setMsg('sent-msg', res.ok ? 'Sent. Check your inbox and spam folder.' : res.message, res.ok ? 'ok' : 'error');
+    if (res.ok) startCooldown($('resend-btn'), 60);
+  });
+
+  $('signup-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = $('signup-btn'); setMsg('signup-msg', ''); busy(btn, true);
+    const email = $('signup-email').value.trim();
+    const res = await RoleRadarAPI.auth.signup($('signup-name').value.trim(), email, $('signup-password').value);
+    busy(btn, false, 'Sign Up');
+    if (res.ok) { $('signup-password').value = ''; showSent('verify', email); startCooldown($('resend-btn'), 60); }
+    else setMsg('signup-msg', res.message);
+  });
+
+  $('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = $('login-btn'); setMsg('login-msg', ''); busy(btn, true);
+    const email = $('login-email').value.trim();
+    const res = await RoleRadarAPI.auth.login(email, $('login-password').value);
+    if (res.ok) {
+      Store.adoptAccount(res.data);
+      window.location.href = params.get('next') || 'dashboard.html';
+      return;
+    }
+    busy(btn, false, 'Log In');
+    if (res.code === 'email_not_verified') { showSent('verify', email); setMsg('sent-msg', res.message, 'error'); }
+    else setMsg('login-msg', res.message);
+  });
+
+  $('forgot-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = $('forgot-btn'); setMsg('forgot-msg', ''); busy(btn, true);
+    const email = $('forgot-email').value.trim();
+    const res = await RoleRadarAPI.auth.forgot(email);
+    busy(btn, false, 'Send Reset Link');
+    if (res.ok) showSent('reset', email); else setMsg('forgot-msg', res.message);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Slim runtime dependencies for hosting (Render). The full requirements.txt is for local development.
+fastapi==0.109.0
+uvicorn==0.27.0
+python-multipart==0.0.6
+pydantic[email]==2.5.3
+sqlalchemy==2.0.23
+mysql-connector-python==8.2.0
+httpx==0.25.2
+python-dotenv==1.0.0
+pyyaml==6.0.1
+PyPDF2==3.0.1
+python-docx==1.2.0

@@ -1,0 +1,183 @@
+/*
+ * RoleRadar responsive layer. Loaded LAST on every page so it can refine the base styles.
+ * Breakpoints: 1024 (tablet landscape), 900 (drawer navigation), 640 (phone), 380 (small phone).
+ */
+
+/* ---------- Foundations (all sizes) ---------- */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+img, svg, video { max-width: 100%; }
+
+/* The content column is a grid child; without min-width:0 any wide child stretches the whole
+   page sideways (this was the source of the horizontal scrolling on phones). */
+.app-shell { grid-template-columns: 250px minmax(0, 1fr); }
+.app-shell > * { min-width: 0; }
+.main { max-width: 1440px; margin-left: auto; margin-right: auto; }
+.job-title, .detail-title, .job-info { overflow-wrap: anywhere; }
+.job-meta { flex-wrap: wrap; }
+
+/* Mobile menu button and overlay exist everywhere but only show on small screens */
+.topbar-menu {
+  display: none; width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--radius-md);
+  border: 1px solid var(--app-border); background: var(--app-bg-card); color: var(--app-text-primary);
+  align-items: center; justify-content: center; font-size: 1.05rem; cursor: pointer;
+}
+.nav-overlay { display: none; }
+.filters-toggle { display: none; }
+
+/* ---------- Tablet landscape and below ---------- */
+@media (max-width: 1024px) {
+  body[data-page="resume-checker"] .dash-grid { grid-template-columns: minmax(0, 1fr); }
+  .stats-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .topbar { padding-left: var(--space-5); padding-right: var(--space-5); }
+}
+
+/* ---------- Drawer navigation (tablet portrait and phones) ---------- */
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: minmax(0, 1fr); }
+
+  .sidebar {
+    position: fixed; top: 0; bottom: 0; left: 0; height: 100vh; height: 100dvh;
+    width: min(280px, 84vw); z-index: 60; overflow-y: auto;
+    transform: translateX(-105%); visibility: hidden;
+    transition: transform .24s ease, visibility 0s linear .24s;
+  }
+  body.nav-open .sidebar { transform: none; visibility: visible; box-shadow: var(--shadow-pop); transition-delay: 0s; }
+  .nav-overlay {
+    display: block; position: fixed; inset: 0; background: rgba(15, 23, 42, .55); z-index: 55;
+    opacity: 0; pointer-events: none; transition: opacity .2s ease;
+  }
+  body.nav-open .nav-overlay { opacity: 1; pointer-events: auto; }
+  body.nav-open { overflow: hidden; }
+  .topbar-menu { display: inline-flex; }
+  .topbar { gap: var(--space-3); }
+  .topbar-search { flex: 1; min-width: 0; width: auto; max-width: none; }
+
+  /* Find Jobs: the desktop layout pins the page and scrolls only the list; on small screens
+     the whole page scrolls normally and the filters fold away behind a button. */
+  body[data-page="find-jobs"] { height: auto; overflow: visible; }
+  body[data-page="find-jobs"] .shell-col,
+  body[data-page="find-jobs"] .main { height: auto; overflow: visible; display: block; }
+  body[data-page="find-jobs"] .jobs-layout { display: block; }
+  body[data-page="find-jobs"] .results-col { height: auto; display: block; }
+  body[data-page="find-jobs"] .results-list { overflow: visible; }
+  body[data-page="find-jobs"] .filter-panel { max-height: none; overflow: visible; }
+  .filters-toggle { display: inline-flex; margin-bottom: var(--space-3); }
+  .filter-panel { display: none; margin-bottom: var(--space-4); position: static; }
+  .filter-panel.open { display: block; }
+
+  body.pub { background-attachment: scroll; }
+  .pub-nav { flex-wrap: wrap; gap: var(--space-3); padding: var(--space-3) var(--space-4); }
+  .pub-nav-links { display: none; }
+}
+
+/* Job rows: between phone and desktop the action buttons pushed the page sideways, so the row wraps from tablet width down */
+@media (max-width: 900px) {
+  .job-row-top { flex-wrap: wrap; align-items: flex-start; }
+  .job-row-top .job-info { flex: 1 1 0; min-width: 0; }
+  .job-actions { flex: 1 1 100%; flex-wrap: wrap; justify-content: flex-end; gap: var(--space-2); }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  .main { padding: var(--space-4); }
+  .page-header h1 { font-size: 1.5rem; }
+  .quote-badge { max-width: none; }
+  .topbar { padding: 10px var(--space-4); }
+  .topbar-right { gap: var(--space-2); }
+
+  .stats-row { gap: var(--space-3); }
+  .stat-tile { padding: var(--space-3); }
+  .section-card { padding: var(--space-4); }
+
+  /* Job rows: logo + title on the first line, badge / salary / actions on the next */
+  .job-row-top { flex-wrap: wrap; align-items: flex-start; }
+  .job-row-top .job-info { flex: 1 1 0; min-width: 0; }
+  .job-actions { flex: 1 1 100%; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2); }
+  .job-skill-row { padding-left: 0; }
+  .results-list { padding: var(--space-1) var(--space-3); }
+  .results-header { flex-wrap: wrap; gap: var(--space-2); }
+
+  /* Search and filters */
+  .search-bar { flex-wrap: wrap; }
+  .search-bar .input-wrap { flex: 1 1 100%; max-width: none !important; }
+  .search-bar .btn { flex: 1 1 100%; }
+  .pill-row { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .pill-row::-webkit-scrollbar { display: none; }
+  .pill-row .pill { flex-shrink: 0; white-space: nowrap; }
+
+  /* Job details */
+  .detail-header { padding: var(--space-4); }
+  .detail-header > div { width: 100%; }
+  .detail-header > div:last-child { align-items: stretch !important; }
+  .detail-header .flex { flex-wrap: wrap; }
+  .detail-header .btn { flex: 1 1 auto; justify-content: center; }
+  .detail-header .salary { text-align: left; }
+  .detail-title { font-size: 1.25rem; }
+  .tabs { overflow-x: auto; white-space: nowrap; gap: var(--space-4); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn { flex-shrink: 0; padding: 12px 2px; }
+
+  /* Applications */
+  .app-row { flex-wrap: wrap; row-gap: var(--space-2); }
+  .app-row .job-info { flex: 1 1 calc(100% - 64px); }
+  .app-row .applied-date { width: auto; flex: 1 1 auto; }
+
+  /* Forms and two-column field rows (interview setup uses an inline grid, hence !important) */
+  .profile-field-row { grid-template-columns: minmax(0, 1fr) !important; }
+  .settings-item { flex-wrap: wrap; gap: var(--space-2); }
+
+  /* Resume checker */
+  .stepper { flex-wrap: wrap; row-gap: var(--space-2); }
+  .step-line { display: none; }
+  .dropzone { padding: var(--space-5) var(--space-3); }
+  #results-content .flex { flex-wrap: wrap; }
+
+  /* Toasts span the bottom of the screen instead of hiding off the right edge */
+  #toast-root { left: var(--space-3); right: var(--space-3); bottom: var(--space-3); align-items: stretch; }
+
+  /* Landing page */
+  .pub-nav-actions .btn { padding: 8px 14px; font-size: var(--fs-sm); }
+  .hero { padding: var(--space-5) var(--space-4); gap: var(--space-5); }
+  .hero-title { font-size: clamp(2rem, 9.5vw, 2.75rem); }
+  .hero-sub { font-size: var(--fs-base); }
+  .hero-search { flex-direction: column; border-radius: var(--radius-lg); padding: var(--space-3); gap: var(--space-2); }
+  .hero-search .divider { display: none; }
+  .hero-search .input { padding: 10px 12px; }
+  .hero-search .btn { width: 100%; justify-content: center; }
+  .hero-visual { aspect-ratio: 16 / 10; }
+  .feature-row, .steps-row { grid-template-columns: minmax(0, 1fr); }
+  .pub-section { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .logo-strip { padding: var(--space-4); justify-content: center; }
+  footer.pub-footer { flex-direction: column; text-align: center; padding: var(--space-5) var(--space-4); }
+  footer.pub-footer .footer-links { gap: var(--space-4); flex-wrap: wrap; justify-content: center; }
+
+  /* Login, signup, verify, reset */
+  .auth-left { min-height: 100vh; min-height: 100dvh; }
+  .auth-left-inner { padding: var(--space-5) var(--space-4); }
+}
+
+/* ---------- Small phones ---------- */
+@media (max-width: 380px) {
+  .stats-row, .quick-actions { grid-template-columns: minmax(0, 1fr); }
+  .page-header h1 { font-size: 1.35rem; }
+}
+
+/* ---------- Touch devices: comfortable tap targets, and no zoom-on-focus in iOS ---------- */
+@media (pointer: coarse) {
+  .btn, .pill, .tab-btn, .sidebar-nav a, .sidebar-logout a, .overflow-menu button { min-height: 44px; }
+  .bookmark-btn, .overflow-btn { min-width: 44px; min-height: 44px; }
+  .filter-opt { padding: 6px 0; margin-bottom: 4px; }
+  .filter-opt input[type="checkbox"], .filter-opt input[type="radio"] { width: 20px; height: 20px; }
+}
+@media (max-width: 900px) and (pointer: coarse) {
+  input, select, textarea { font-size: 16px; }
+}
+
+/* ---------- Respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .nav-overlay { transition: none; }
+}
+
+/* Search input must be allowed to shrink inside the topbar, or it pushes the icons on top of itself */
+.topbar-search input { min-width: 0; width: 100%; }
+.topbar-search { overflow: hidden; }

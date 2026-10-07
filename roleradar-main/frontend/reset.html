@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reset Password — RoleRadar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/public.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body class="pub">
+<div class="auth-shell">
+  <div class="auth-left">
+   <div class="auth-left-inner">
+    <div class="pub-logo" id="auth-logo" style="margin-bottom:32px;"></div>
+    <div id="reset-panel">
+      <h1 style="font-size:var(--fs-xl);margin-bottom:4px;">Choose a New Password</h1>
+      <p style="color:var(--pub-text-secondary);margin-bottom:24px;">Pick a password of at least 8 characters.</p>
+      <p class="auth-msg" id="reset-msg" role="alert"></p>
+      <form id="reset-form">
+        <div class="field">
+          <label for="reset-password">New password</label>
+          <input class="input" type="password" id="reset-password" placeholder="At least 8 characters" autocomplete="new-password" minlength="8" maxlength="128" required>
+        </div>
+        <div class="field">
+          <label for="reset-confirm">Confirm new password</label>
+          <input class="input" type="password" id="reset-confirm" placeholder="Repeat the password" autocomplete="new-password" minlength="8" maxlength="128" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="reset-btn">Update Password</button>
+      </form>
+      <p style="text-align:center;margin-top:24px;font-size:var(--fs-sm);"><a href="login.html" class="auth-toggle-link">Back to Log In</a></p>
+    </div>
+   </div>
+  </div>
+
+  <div class="auth-right">
+    <h2>One Platform for a <span style="color:var(--accent-green)">Brighter</span> Tomorrow</h2>
+    <div style="margin-top:24px;">
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Find real jobs</div>
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Get AI-powered insights</div>
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Improve your resume</div>
+      <div class="auth-check"><i class="fas fa-circle-check"></i> Practice interviews</div>
+    </div>
+    <div class="auth-quote">"Opportunities don't happen. You find them."</div>
+  </div>
+</div>
+
+<script src="assets/js/store.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+  const $ = (id) => document.getElementById(id);
+  $('auth-logo').innerHTML = `<span class="rr-mark">${RR_LOGO_SVG}</span><span class="wordmark"><span class="wordmark-role">Role</span><span class="wordmark-radar">Radar</span></span>`;
+  const token = new URLSearchParams(window.location.search).get('token') || '';
+  function setMsg(text, kind) { const el = $('reset-msg'); el.textContent = text || ''; el.className = 'auth-msg' + (text ? ' show ' + kind : ''); }
+  if (!token) setMsg('This link is missing its token. Please use the link from your email, or ask for a new one from the login page.', 'error');
+  $('reset-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!token) return;
+    const pw = $('reset-password').value;
+    if (pw !== $('reset-confirm').value) { setMsg('The two passwords do not match.', 'error'); return; }
+    const btn = $('reset-btn'); btn.disabled = true; btn.textContent = 'Please wait…'; setMsg('');
+    const res = await RoleRadarAPI.auth.reset(token, pw);
+    if (res.ok) { window.location.href = 'login.html?reset=1'; return; }
+    btn.disabled = false; btn.textContent = 'Update Password';
+    setMsg(res.message, 'error');
+  });
+</script>
+</body>
+</html>

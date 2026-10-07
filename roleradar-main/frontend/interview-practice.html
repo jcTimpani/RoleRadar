@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Interview Practice — RoleRadar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<script src="assets/js/store.js"></script>
+<script src="assets/js/auth-gate.js"></script>
+</head>
+<body class="app" data-page="interview-practice">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div>
+    <header class="topbar" id="topbar-root"></header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>AI Interview Practice</h1>
+          <p>Get role-specific questions and real-time feedback.</p>
+        </div>
+      </div>
+
+      <div class="card section-card" style="margin-bottom:20px;">
+        <div class="profile-field-row" style="align-items:end;grid-template-columns:1fr 1fr auto;">
+          <div class="field" style="margin:0;">
+            <label>Select Role</label>
+            <select class="input" id="role-select"><option value="">Loading jobs…</option></select>
+          </div>
+          <div class="field" style="margin:0;">
+            <label>Difficulty Level</label>
+            <select class="input" id="difficulty-select">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" id="start-practice-btn">Start Practice</button>
+        </div>
+      </div>
+
+      <div class="qa-layout" id="qa-layout" style="display:none;">
+        <div class="card section-card">
+          <h3>Sample Questions</h3>
+          <ul class="question-list" id="question-list"></ul>
+          <div class="field" style="margin-top:16px;">
+            <label style="display:flex;align-items:center;justify-content:space-between;">
+              <span>Your Answer</span>
+              <button class="btn btn-outline btn-sm" id="voice-btn" type="button" style="display:none;"><i class="fas fa-microphone"></i> Speak Answer</button>
+            </label>
+            <textarea class="input" id="answer-input" rows="4" placeholder="Type your answer here, or click Speak Answer to talk instead…"></textarea>
+            <p class="text-muted" id="voice-status" style="font-size:var(--fs-xs);margin-top:4px;display:none;"></p>
+          </div>
+          <button class="btn btn-primary btn-block" id="submit-answer-btn">Submit Answer</button>
+        </div>
+        <div class="feedback-card">
+          <h4><i class="fas fa-circle-check"></i> AI Feedback</h4>
+          <div id="feedback-body">
+            <p class="text-muted">Answer a question to see AI feedback here.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" id="qa-empty">
+        <i class="fas fa-comments"></i>
+        <p>Select a role and difficulty, then start practicing.</p>
+      </div>
+    </main>
+    <footer class="app-footer">RoleRadar — Your Skills. Our Radar. A Brighter Tomorrow.</footer>
+  </div>
+</div>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/jobs-ui.js"></script>
+<script src="assets/js/sidebar.js"></script>
+<script src="assets/js/interview.js"></script>
+</body>
+</html>

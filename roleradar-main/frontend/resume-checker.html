@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Completeness Checker — RoleRadar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/app.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<script src="assets/js/store.js"></script>
+<script src="assets/js/auth-gate.js"></script>
+</head>
+<body class="app" data-page="resume-checker">
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar-root"></aside>
+  <div>
+    <header class="topbar" id="topbar-root"></header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>AI Resume Completeness Checker</h1>
+          <p>Get detailed feedback and improve your resume for your target role.</p>
+        </div>
+      </div>
+
+      <div class="stepper">
+        <div class="step active" id="step-1"><span class="num">1</span> Upload</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-2"><span class="num">2</span> Select Role</div>
+        <div class="step-line"></div>
+        <div class="step" id="step-3"><span class="num">3</span> Get Results</div>
+      </div>
+
+      <div class="dash-grid">
+        <div class="card section-card">
+          <div class="dropzone" id="dropzone">
+            <i class="fas fa-cloud-arrow-up"></i>
+            <p><strong>Upload your resume (PDF, DOCX, or TXT)</strong></p>
+            <p class="text-muted">Drag and drop your file here or click to browse<br>Max file size: 10MB</p>
+            <input type="file" id="file-input" accept=".pdf,.docx,.txt" style="display:none">
+            <button class="btn btn-primary" id="choose-file-btn" type="button" style="margin-top:14px;">Choose File</button>
+            <p id="file-name" class="text-muted" style="margin-top:10px;font-weight:600;"></p>
+          </div>
+
+          <div class="field" style="margin-top:24px;">
+            <label>Target Role / Job (Optional)</label>
+            <select class="input" id="target-role-select">
+              <option value="">General check (no specific role or job)</option>
+              <optgroup label="Target Role (general)" id="role-optgroup">
+                <option value="role:data-scientist">Data Scientist</option>
+                <option value="role:software-engineer">Software Engineer</option>
+                <option value="role:frontend-developer">Frontend Developer</option>
+                <option value="role:backend-developer">Backend Developer</option>
+                <option value="role:qa-engineer">QA Engineer</option>
+                <option value="role:devops-engineer">DevOps Engineer</option>
+                <option value="role:cybersecurity-analyst">Cybersecurity Analyst</option>
+                <option value="role:machine-learning-engineer">Machine Learning Engineer</option>
+              </optgroup>
+              <optgroup label="Specific Job Listing" id="job-optgroup"></optgroup>
+            </select>
+          </div>
+
+          <button class="btn btn-primary btn-block" id="analyze-btn" style="margin-top:8px;">Analyze Resume</button>
+        </div>
+
+        <div class="card section-card" id="results-panel">
+          <h3>Analysis Results</h3>
+          <div class="empty-state" id="results-empty">
+            <i class="fas fa-chart-pie"></i>
+            <p>Upload your resume and click <strong>Analyze Resume</strong> to see your completeness score, strengths, and recommendations here.</p>
+          </div>
+          <div id="results-content" style="display:none;">
+            <div class="flex items-center gap-4" style="margin:16px 0;">
+              <div class="progress-ring">
+                <svg width="110" height="110">
+                  <circle class="ring-bg" cx="55" cy="55" r="45"></circle>
+                  <circle class="ring-fg" id="score-ring-fg" cx="55" cy="55" r="45" stroke-dasharray="283" stroke-dashoffset="283"></circle>
+                </svg>
+                <div class="ring-label"><span id="score-ring-value">0%</span><small>Overall<br>Score</small></div>
+              </div>
+              <div style="flex:1;">
+                <h4 style="margin:0 0 6px;color:var(--app-danger);">Missing / Incomplete Sections</h4>
+                <div id="missing-sections"></div>
+              </div>
+            </div>
+            <h4 style="color:var(--accent-green-hover);">Strengths</h4>
+            <div id="strengths-list"></div>
+            <h4 style="margin-top:16px;">Recommended Improvements</h4>
+            <div id="improvements-list"></div>
+            <button class="btn btn-info btn-block" id="download-report-btn" style="margin-top:20px;"><i class="fas fa-download"></i> Download Detailed Report</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="app-footer">RoleRadar — Your Skills. Our Radar. A Brighter Tomorrow.</footer>
+  </div>
+</div>
+
+<script src="assets/js/api.js"></script>
+<script src="assets/js/jobs-ui.js"></script>
+<script src="assets/js/sidebar.js"></script>
+<script src="assets/js/resume.js"></script>
+</body>
+</html>

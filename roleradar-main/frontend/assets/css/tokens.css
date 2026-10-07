@@ -1,0 +1,74 @@
+/* RoleRadar design tokens — shared by public (dark hero) and app (light) themes */
+:root {
+  /* Brand accent — used everywhere as primary CTA / active state */
+  --accent-green: #22c55e;
+  --accent-green-hover: #16a34a;
+  --accent-green-soft: #dcfce7;
+
+  /* Radius scale */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-8: 48px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 8px 24px rgba(15, 23, 42, 0.10);
+  --shadow-pop: 0 12px 32px rgba(15, 23, 42, 0.18);
+
+  /* Type scale */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1.0625rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.875rem;
+  --fs-2xl: 2.5rem;
+  --fs-3xl: 3.25rem;
+
+  /* Public (dark hero) theme — landing + login */
+  --pub-bg-base: #0b1220;
+  --pub-bg-gradient: linear-gradient(135deg, #0b1220 0%, #132743 60%, #0f2e24 100%);
+  --pub-card-bg: #16213a;
+  --pub-card-bg-2: #101a2e;
+  --pub-text-primary: #f8fafc;
+  --pub-text-secondary: #94a3b8;
+  --pub-border: rgba(255, 255, 255, 0.08);
+  --pub-accent: var(--accent-green);
+
+  /* App (light, post-login) theme */
+  --app-bg-page: #f4f6f9;
+  --app-bg-sidebar: #0f172a;
+  --app-bg-sidebar-hover: #1b2740;
+  --app-bg-card: #ffffff;
+  --app-text-primary: #0f172a;
+  --app-text-secondary: #64748b;
+  --app-text-muted: #94a3b8;
+  --app-border: #e5e7eb;
+  --app-accent: var(--accent-green);
+  --app-danger: #ef4444;
+  --app-danger-soft: #fee2e2;
+  --app-warning: #f59e0b;
+  --app-warning-soft: #fef3c7;
+  --app-info: #3b82f6;
+  --app-info-soft: #dbeafe;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; cursor: pointer; }
+img, svg { display: block; max-width: 100%; }
